@@ -22,4 +22,10 @@ public class EnemyMotor {
 	public void render(Graphics g) {
 		g.drawImage(loadImage.motorE, x, y - motor.getOfset(), 40, 70, null);
 	}
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
+	}
 }

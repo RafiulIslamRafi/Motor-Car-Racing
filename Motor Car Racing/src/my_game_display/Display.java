@@ -24,14 +24,10 @@ public class Display {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setLocationRelativeTo(null);
 		canvas = new Canvas();
-		canvas.setPreferredSize(new Dimension(width,height));
+		canvas.setPreferredSize(new Dimension(width,height-6));
 		//canvas.setBackground(Color.black);
 		canvas.setFocusable(false);
 		frame.add(canvas);
 		frame.pack();
 	}
-	
-	
-	
-	
 }

@@ -1,6 +1,7 @@
 package my_game_motor;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -17,43 +18,127 @@ public class Motor implements KeyListener{
 	private double speed;
 	
 	
+	private int health;
+	private int gare;
+	
 	public Motor() {
 		x = Display.width/2-10;
-		y = Tile.tileHeight*120;
+		y = Tile.tileHeight*1000000 - 60;
 		ofset = 0;
 		speed = 0.3f;
+		health = 3;
+		gare = 0;
 	}
 	public void init() {
 		Display.frame.addKeyListener(this);;
 	}
 	public void tick() {
-		ofset = y - (Display.height - 100);
-		if(right)
-			x+=1;
-		if(left) 
-			x-=1;
-		if(up)
+		//System.out.println(x);
+		if(health > 0)
 		{
-			speed += 0.03f;
-			if(speed>=7) speed=7;
-		}
-		y -= speed;
-		if(down)
-		{
-			speed -= 0.030f;
-			if(speed<=0) speed =0; 
+			ofset = y - (Display.height - 100);
+			if(right && x<=338)
+				x+=2;
+			if(left && x>=124) 
+				x-=2;
+			if(up)
+			{
+				speed += 0.03f;
+				if(speed>=7) speed=7;
+			}
+			y -= speed;
+			if(down)
+			{
+				speed -= 0.030f;
+				if(speed<=0) speed =0; 
+			}
 		}
 	}
-	
+	public int getX() {
+		return x;
+	}
+	public int getY() {
+		return y;
+	}
+	public double getSpeed() {
+		return speed;
+	}
 	public int getOfset()
 	{
 		return ofset;
 	}
-	public void render(Graphics g) {
-		g.setColor(Color.red);
-		//g.fillRect(x, y - ofset, 40, 60);
-		g.drawImage(loadImage.motorP,x,y-ofset,40,60,null);
+	
+	public void setSpeed(double speed) {
+		this.speed = speed;
 	}
+	
+	public void setHealth(int health)
+	{
+		this.health = health;
+	}
+	
+	public void drawBoard(Graphics g)
+	{
+		int speedd = (int) speed;
+		switch(speedd) {
+		
+		case 0: gare = 0; break;
+		case 2: gare = 1; break;	
+		case 4: gare = 2; break;
+		case 6: gare = 3; break;
+		
+		}
+		
+		g.setColor(Color.white);
+		g.fillRect(10, 10, 130, 80);
+		
+		//draw gare and health
+		g.setColor(Color.black);
+		String gareDisplay = Integer.toString(gare);
+		g.setFont(new Font("arial",Font.BOLD,30));
+		g.drawString("Gare: "+gareDisplay, 20, 40);
+		g.drawString("Health:"+health, 20, 80);
+	}
+	
+	public void gameOver(Graphics g)
+	{
+		g.setColor(Color.red);
+		g.setFont(new Font("arial",Font.BOLD,40));
+		g.drawString("Game Over", Display.width/3-20, Display.height/2);
+	}
+	
+	public void render(Graphics g) {
+		if(health  > 0)
+		{
+			g.setColor(Color.red);
+			//g.fillRect(x, y - ofset, 40, 60);
+			g.drawImage(loadImage.motorP,x,y-ofset,40,60,null);
+		}
+		else gameOver(g);
+		drawBoard(g);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 		

@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 
 public class loadImage {
 	
-	public static BufferedImage fullImage, road, fullImage2, grass, fullImage3, footpath, fullImage4, fullImage5, motorP,motorE;
+	public static BufferedImage fullImage, road, fullImage2, grass, fullImage3, footpath, fullImage4, fullImage5, motorP,motorE, fullImage6, smoke;
 	
 	public static void init() {
 		fullImage = imageLoader("/roadImage.jpg");
@@ -15,6 +15,7 @@ public class loadImage {
 		fullImage3 = imageLoader("/footpath.jpg");
 		fullImage4 = imageLoader("/mc.png");
 		fullImage5 = imageLoader("/ec.png");
+		fullImage6 = imageLoader("/smoke.gif");
 		crop();
 	}
 	public static BufferedImage imageLoader(String path) {
@@ -34,5 +35,6 @@ public class loadImage {
 		footpath = fullImage3.getSubimage(10,10, 100, 100);
 		motorP = fullImage4.getSubimage(0, 0, 158, 320);
 		motorE = fullImage5.getSubimage(0, 0, 158, 320);
+		smoke = fullImage6.getSubimage(250, 250, 100, 100);
 	}
 }
