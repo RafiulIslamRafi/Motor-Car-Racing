@@ -17,8 +17,7 @@ public class Motor implements KeyListener{
 	
 	private double speed;
 	
-	
-	private int health;
+	private int health,score;
 	private int gare;
 	
 	public Motor() {
@@ -28,9 +27,10 @@ public class Motor implements KeyListener{
 		speed = 0.3f;
 		health = 3;
 		gare = 0;
+		score = 0;
 	}
 	public void init() {
-		Display.frame.addKeyListener(this);;
+		Display.frame.addKeyListener(this);
 	}
 	public void tick() {
 		//System.out.println(x);
@@ -38,13 +38,13 @@ public class Motor implements KeyListener{
 		{
 			ofset = y - (Display.height - 100);
 			if(right && x<=338)
-				x+=2;
-			if(left && x>=124) 
-				x-=2;
+				x += 2;
+			if(left && x >= 124)
+				x -= 2;
 			if(up)
 			{
 				speed += 0.03f;
-				if(speed>=7) speed=7;
+				if(speed >= 10) speed = 10;
 			}
 			y -= speed;
 			if(down)
@@ -76,28 +76,33 @@ public class Motor implements KeyListener{
 	{
 		this.health = health;
 	}
-	
+	public void setScore(int score)
+	{
+		this.score = score;
+	}
 	public void drawBoard(Graphics g)
 	{
 		int speedd = (int) speed;
 		switch(speedd) {
-		
 		case 0: gare = 0; break;
-		case 2: gare = 1; break;	
+		case 2: gare = 1; break;
 		case 4: gare = 2; break;
 		case 6: gare = 3; break;
-		
+		case 8: gare = 4; break;
+		case 10: gare = 5; break;
 		}
 		
 		g.setColor(Color.white);
-		g.fillRect(10, 10, 130, 80);
+		g.fillRect(10, 10, 150, 120);
 		
-		//draw gare and health
+		//draw gare and health..
+		
 		g.setColor(Color.black);
 		String gareDisplay = Integer.toString(gare);
 		g.setFont(new Font("arial",Font.BOLD,30));
-		g.drawString("Gare: "+gareDisplay, 20, 40);
-		g.drawString("Health:"+health, 20, 80);
+		g.drawString("Gare  : "+gareDisplay, 20, 40);
+		g.drawString("Car    : "+health, 20, 80);
+		g.drawString("Score: "+score, 20, 120);
 	}
 	
 	public void gameOver(Graphics g)
@@ -105,6 +110,9 @@ public class Motor implements KeyListener{
 		g.setColor(Color.red);
 		g.setFont(new Font("arial",Font.BOLD,40));
 		g.drawString("Game Over", Display.width/3-20, Display.height/2);
+		
+		//highScore write er code korbo...
+		
 	}
 	
 	public void render(Graphics g) {
@@ -119,31 +127,10 @@ public class Motor implements KeyListener{
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	@Override
 	public void keyTyped(KeyEvent e) {
-		
-		
 	}
+	
 	@Override
 	public void keyPressed(KeyEvent e) {   
 		int sourse  = e.getKeyCode();

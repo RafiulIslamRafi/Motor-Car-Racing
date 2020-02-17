@@ -9,7 +9,6 @@ import my_game_manager.gameManager;
 public class gameSetUp implements Runnable {
 	
 	private Thread thread;
-	private Display display;
 	private String title;
 	private int width;
 	private int height;
@@ -25,7 +24,7 @@ public class gameSetUp implements Runnable {
 	
 	
 	public void init(){
-		display = new Display(title,width,height);
+		new Display(title,width,height);
 		manager = new gameManager();
 		manager.init();
 	}
@@ -44,13 +43,13 @@ public class gameSetUp implements Runnable {
 		}
 	}
 	public void tick() {
-		manager.tick();
+		manager.tick(); 
 	}
 	public void render() {
-		buffer = display.canvas.getBufferStrategy(); 
+		buffer = Display.canvas.getBufferStrategy(); 
 		if(buffer == null) {
-			display.canvas.createBufferStrategy(3);
-			return;
+			Display.canvas.createBufferStrategy(3);
+			return; 
 		}
 		g = buffer.getDrawGraphics();
 		
@@ -58,12 +57,11 @@ public class gameSetUp implements Runnable {
 		g.clearRect(0, 0, width, height);
 		
 		//draw start.
-		manager.render(g);
+		manager.render(g); 
 		
 		//next two line now execute on the manager class...
 		//g.setColor(Color.red);
 		//g.fillRect(12, y, 40, 40);
-		//draw end.
 		
 		buffer.show();
 		g.dispose();

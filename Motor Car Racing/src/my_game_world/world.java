@@ -21,7 +21,7 @@ public class world {
 	}
 	
 	public String loadFile(String path) {
-		StringBuilder sr = new StringBuilder();
+		StringBuilder sr = new StringBuilder(); 
 		try {
 			BufferedReader reader = new BufferedReader(new FileReader(path));
 			String line;
