@@ -1,6 +1,9 @@
 package my_game_manager;
 
 import java.awt.Graphics;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -18,7 +21,7 @@ public class gameManager {
 	private long time = System.nanoTime();
 	private long time2 = System.nanoTime();
 	private long delay,delay2;
-	private int health,score; 
+	private int health,score,hscore; 
 	private int oRandx,oRandy;
 	
 	private ArrayList<EnemyMotor> eMotor;
@@ -31,7 +34,7 @@ public class gameManager {
 		gFood = new ArrayList<Food>();
 		
 		delay = 2000;
-		delay2 = 20000;
+		delay2 = 60000;
 		health = 3;
 		oRandx = 0;
 		oRandy = 0;
@@ -71,10 +74,30 @@ public class gameManager {
 				motor.setHealth(health);
 				motor.setSpeed(0);
 			}
+			if(py+200<ey) {
+				eMotor.remove(i);
+			}
+			
 			if(py + 70 <= ey && ey <= py + 80)
 			{
 				score++;
 				motor.setScore(score);
+				
+				//for highScore Update.
+				hscore = motor.getHScore();
+				if(hscore<score)
+				{
+					//file write korbo hscore er value.
+					// path = res/HScore.txt
+					PrintWriter writer = null;
+					try {
+						writer = new PrintWriter("res/HScore.txt", "UTF-8");
+					} catch (FileNotFoundException | UnsupportedEncodingException e) {
+						e.printStackTrace();
+					}
+					writer.println(score);
+					writer.close();
+				}
 			}
 		}
 		
@@ -86,22 +109,32 @@ public class gameManager {
 			int fx = gFood.get(i).getX();
 			int fy = gFood.get(i).getY();
 			
+			if(fy>700) {
+				gFood.remove(i);
+			}
+			
+			
 			if(px < fx + 40 && px + 40 > fx   &&   py < fy + 15 && py + 60 > fy)
 			{
-				// Problem Ace, Solve korte hobe.
 				gFood.remove(i);
 				i--;
-				health++;
-				motor.setHealth(health);
+				if(health<5) {
+					health++;
+					motor.setHealth(health);
+				}
 			}
 		}
+		
+		//for HighScore read.
+		String[] number = world.loadFile("res/HScore.txt").split("\\s+");
+		motor.setHighScore(Integer.parseInt(number[0]));
 		
 		//for EnemyMotor.
 		long elapsed = (System.nanoTime() - time)/1000000;
 		if(elapsed>delay && ((randy+60<=oRandy || randy>=oRandy+60) || (randx+40<=oRandx || randx>=oRandx+40)))
 		{
 			if(motor.getSpeed()>=3) {
-				eMotor.add(new EnemyMotor(motor,randx,-randy+motor.getOfset()));
+				eMotor.add(new EnemyMotor(motor,randx,-randy+motor.getOfset()-40));
 			}
 			time = System.nanoTime();
 			oRandx = randx;
@@ -130,7 +163,7 @@ public class gameManager {
 		{
 			gFood.get(i).tick();
 		}
-	}
+	}	
 	
 	public void render(Graphics g) {
 		world.render(g);

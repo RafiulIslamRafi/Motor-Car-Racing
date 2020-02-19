@@ -54,7 +54,7 @@ public class gameSetUp implements Runnable {
 		g = buffer.getDrawGraphics();
 		
 		//ager sob draw clear kore disci.
-		g.clearRect(0, 0, width, height);
+		g.clearRect(0, 0, width, height+300);
 		
 		//draw start.
 		manager.render(g); 

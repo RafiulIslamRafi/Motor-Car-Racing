@@ -17,7 +17,7 @@ public class Motor implements KeyListener{
 	
 	private double speed;
 	
-	private int health,score;
+	private int health,score,hscore;
 	private int gare;
 	
 	public Motor() {
@@ -80,6 +80,12 @@ public class Motor implements KeyListener{
 	{
 		this.score = score;
 	}
+	public void setHighScore(int hscore) {
+		this.hscore = hscore;
+	}
+	public int getHScore() {
+		return hscore;
+	}
 	public void drawBoard(Graphics g)
 	{
 		int speedd = (int) speed;
@@ -99,10 +105,11 @@ public class Motor implements KeyListener{
 		
 		g.setColor(Color.black);
 		String gareDisplay = Integer.toString(gare);
-		g.setFont(new Font("arial",Font.BOLD,30));
-		g.drawString("Gare  : "+gareDisplay, 20, 40);
-		g.drawString("Car    : "+health, 20, 80);
-		g.drawString("Score: "+score, 20, 120);
+		g.setFont(new Font("arial",Font.BOLD,20));
+		g.drawString("Gare  : "+gareDisplay, 20, 30);
+		g.drawString("Life    : "+health, 20, 60);
+		g.drawString("Score : "+score, 20, 90);
+		g.drawString("Highscore: "+hscore, 20, 120);
 	}
 	
 	public void gameOver(Graphics g)

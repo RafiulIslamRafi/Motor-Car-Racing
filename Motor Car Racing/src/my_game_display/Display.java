@@ -27,6 +27,7 @@ public class Display {
 		canvas.setPreferredSize(new Dimension(width,height-6));
 		//canvas.setBackground(Color.black);
 		canvas.setFocusable(false);
+		frame.setResizable(false);
 		frame.add(canvas);
 		frame.pack();
 	}

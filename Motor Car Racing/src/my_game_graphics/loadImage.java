@@ -15,7 +15,7 @@ public class loadImage {
 		fullImage3 = imageLoader("/footpath.jpg");
 		fullImage4 = imageLoader("/mc.png");
 		fullImage5 = imageLoader("/ec.png");
-		fullImage6 = imageLoader("/smoke.gif");
+		//fullImage6 = imageLoader("/smoke.gif");
 		fullImage7 = imageLoader("/gass.png");
 		crop();
 	}
@@ -36,7 +36,7 @@ public class loadImage {
 		footpath = fullImage3.getSubimage(10,10, 100, 100);
 		motorP = fullImage4.getSubimage(0, 0, 158, 320);
 		motorE = fullImage5.getSubimage(0, 0, 300, 570);
-		smoke = fullImage6.getSubimage(250, 250, 100, 100);
+		//smoke = fullImage6.getSubimage(250, 250, 100, 100);
 		gass = fullImage7.getSubimage(0, 0, 360, 126);
 	}
 }
