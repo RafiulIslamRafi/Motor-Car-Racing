@@ -17,7 +17,7 @@ public class Motor implements KeyListener{
 	
 	private double speed;
 	
-	private int health,score,hscore;
+	private int life,score,hscore;
 	private int gare;
 	
 	public Motor() {
@@ -25,7 +25,7 @@ public class Motor implements KeyListener{
 		y = Tile.tileHeight*1000000 - 60;
 		ofset = 0;
 		speed = 0.3f;
-		health = 3;
+		life = 3;
 		gare = 0;
 		score = 0;
 	}
@@ -34,7 +34,7 @@ public class Motor implements KeyListener{
 	}
 	public void tick() {
 		//System.out.println(x);
-		if(health > 0)
+		if(life > 0)
 		{
 			ofset = y - (Display.height - 100);
 			if(right && x<=338)
@@ -72,9 +72,9 @@ public class Motor implements KeyListener{
 		this.speed = speed;
 	}
 	
-	public void setHealth(int health)
+	public void setLife(int life)
 	{
-		this.health = health;
+		this.life = life;
 	}
 	public void setScore(int score)
 	{
@@ -107,7 +107,7 @@ public class Motor implements KeyListener{
 		String gareDisplay = Integer.toString(gare);
 		g.setFont(new Font("arial",Font.BOLD,20));
 		g.drawString("Gare  : "+gareDisplay, 20, 30);
-		g.drawString("Life    : "+health, 20, 60);
+		g.drawString("Life    : "+life, 20, 60);
 		g.drawString("Score : "+score, 20, 90);
 		g.drawString("Highscore: "+hscore, 20, 120);
 	}
@@ -123,7 +123,7 @@ public class Motor implements KeyListener{
 	}
 	
 	public void render(Graphics g) {
-		if(health  > 0)
+		if(life  > 0)
 		{
 			g.setColor(Color.red);
 			//g.fillRect(x, y - ofset, 40, 60);

@@ -1,6 +1,6 @@
 package my_game_manager;
 
-import java.awt.Graphics;
+import java.awt.Graphics; //loadImage
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -21,7 +21,7 @@ public class gameManager {
 	private long time = System.nanoTime();
 	private long time2 = System.nanoTime();
 	private long delay,delay2;
-	private int health,score,hscore; 
+	private int life,score,hscore; 
 	private int oRandx,oRandy;
 	
 	private ArrayList<EnemyMotor> eMotor;
@@ -35,7 +35,7 @@ public class gameManager {
 		
 		delay = 2000;
 		delay2 = 60000;
-		health = 3;
+		life = 3;
 		oRandx = 0;
 		oRandy = 0;
 		score = 0;
@@ -70,8 +70,8 @@ public class gameManager {
 			{
 				eMotor.remove(i);
 				i--;
-				health--;
-				motor.setHealth(health);
+				life--;
+				motor.setLife(life);
 				motor.setSpeed(0);
 			}
 			if(py+200<ey) {
@@ -114,13 +114,13 @@ public class gameManager {
 			}
 			
 			
-			if(px < fx + 40 && px + 40 > fx   &&   py < fy + 15 && py + 60 > fy)
+			if(px < fx + 28 && px + 40 > fx   &&   py < fy + 40 && py + 60 > fy)
 			{
 				gFood.remove(i);
 				i--;
-				if(health<5) {
-					health++;
-					motor.setHealth(health);
+				if(life<5) {
+					life++;
+					motor.setLife(life);
 				}
 			}
 		}

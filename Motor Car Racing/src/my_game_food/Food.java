@@ -1,6 +1,7 @@
 package my_game_food;
 
 import java.awt.Graphics;
+
 import my_game_graphics.loadImage;
 
 public class Food {
@@ -16,11 +17,11 @@ public class Food {
 	public void tick()
 	{
 		y += 3;
-		//if(motor.getSpeed()==0) y -= 1;
+		//if(motor.getSpeed()!=0.0) y += 3;
 	}
 	public void render(Graphics g) {
 		//System.out.println(y+" - "+motor.getOfset()+" = "+ (y - motor.getOfset()));
-		g.drawImage(loadImage.gass, x, y, 40, 15, null);
+		g.drawImage(loadImage.balloon, x, y, 30, 40, null);
 	}
 	public int getX() {
 		return x;

@@ -73,7 +73,7 @@ public class gameSetUp implements Runnable {
 		int fps = 50;
 		double timePerTick = 1000000000/fps;
 		double delta = 0;
-		long current  = System.nanoTime();	
+		long current  = System.nanoTime();
 				
 		while(true) {
 			delta = delta + (System.nanoTime()-current)/timePerTick;
